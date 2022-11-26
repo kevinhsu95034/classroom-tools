@@ -88,8 +88,49 @@
 		</nav>
 
         <h1 style="margin-left:50px"> Number systems</h1>
-		<p>Page under construction</p>
+		<div class="container">
+			<div class="text-center" style="font-size: 200%;">
+				<span id="number"></span><sub id="base_text">(2)</sub>
+			</div>
+			<b>Convert the above number from <span id="from_text"></span> to</b>
+			<br><br>
+			<span id="to1_text">Decimal</span>: <span id="answer1"></span>
+			<button onclick="show1()">Show answer</button>
+			<br><br>
+			<span id="to2_text">Hexadeciaml</span>: <span id="answer2"></span>
+			<button onclick="show2()">Show answer</button>
+			<br><br><br>
+			<button onclick="location.reload()">Try another one</button>
+			<br><br><br><br>
+		</div>
 
+		<script src="js/util.js"></script>
+		<script src="js/compsci.js"></script>
+		<script>
+			const n = randomInt(1, 256)
+
+			const bases = [2, 10, 16]
+			const base = randomFromList(bases)
+			const tos = []
+			for(let i=0;i<3;i++){
+				if(base != bases[i])
+					tos.push(bases[i])
+			}
+			
+			document.getElementById("number").innerHTML = toBase(n, base)
+			document.getElementById("base_text").innerHTML = "("+base+")"
+
+			document.getElementById("from_text").innerHTML = base==2 ? "binary" : base==10 ? "decimal" : "hexadecimal"
+			document.getElementById("to1_text").innerHTML = tos[0]==2 ? "binary" : tos[0]==10 ? "decimal" : "hexadecimal"
+			document.getElementById("to2_text").innerHTML = tos[1]==2 ? "binary" : tos[1]==10 ? "decimal" : "hexadecimal"
+
+			function show1(){
+				document.getElementById("answer1").innerHTML = toBase(n, tos[0]) + "<sub>(" + tos[0] + ")</sub>"
+			}
+			function show2(){
+				document.getElementById("answer2").innerHTML = toBase(n, tos[1]) + "<sub>(" + tos[1] + ")</sub>"
+			}
+		</script>
 	</div>
 
 	<!-- jQuery -->

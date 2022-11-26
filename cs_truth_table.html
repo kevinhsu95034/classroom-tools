@@ -88,7 +88,94 @@
 		</nav>
 
         <h1 style="margin-left:50px"> Truth table</h1>
-		<p>Page under construction</p>
+		<div class="container">
+			<span style="font-size: 120%;">Construct the truth table for the following logic expression:</span>
+			<div class="text-center" style="font-size: 200%;">
+				<span id="expression"></span>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-2">
+					<button onclick="showAnswer()">Show answer</button>
+					<br><br>
+					<button onclick="location.reload()">Try another one</button>
+					<br><br><br><br>
+				</div>
+				<div class="col-md-10">
+					<table class="table" style="text-align: center;">
+						<thead>
+						  <tr id="header_row">
+						  </tr>
+						</thead>
+						<tbody id="body">
+							<tr><td></td><td></td><td></td><td></td><td></td></tr>
+						</tbody>
+					  </table>
+				</div>
+			</div>
+		</div>
+
+
+		<script src="js/util.js"></script>
+		<script src="js/compsci.js"></script>
+		<script>
+			//Make expression
+			const types = ["AND", "OR", "XOR", "NAND", "NOR", "XNOR"]
+			const back = Math.random() > 0.5
+			const nots = [false, false, false]
+			const gates = [randomFromList(types), randomFromList(types)]
+
+			if(back)
+				document.getElementById("expression").innerHTML = "A <small>"+gates[0]+"</small> (B <small>"+gates[1]+"</small> C)"
+			else
+				document.getElementById("expression").innerHTML = "(A <small>"+gates[0]+"</small> B) <small>"+gates[1]+"</small> C"
+
+			//Populate header
+			const header = ["A", "B", "C"]
+			header[3] = back ? "B <small>"+gates[1]+"</small> C" : "A <small>"+gates[0]+"</small> B"
+			header[4] = document.getElementById("expression").innerHTML
+
+
+			const head = document.getElementById("header_row")
+			for(let i=0;i<header.length;i++){
+				head.innerHTML += "<th class='text-center'>"+ header[i] +"</th>"
+			}
+
+			function makeRow(a, b, c){
+				let line = "<tr>"
+				
+				line += "<td>" + a + "</td>"
+				line += "<td>" + b + "</td>"
+				line += "<td>" + c + "</td>"
+
+				let m
+				if(back){
+					m = gate(b, c, gates[1])
+					line += "<td>" + m + "</td>"
+					line += "<td>" + gate(a, m, gates[0]) + "</td>"
+				}else{
+					m = gate(a, b, gates[0])
+					line += "<td>" + m + "</td>"
+					line += "<td>" + gate(m, c, gates[1]) + "</td>"
+				}
+					
+				line += "</tr>"
+
+				return line
+			}
+
+			function showAnswer(){
+				const body = document.getElementById("body")
+				body.innerHTML = ""
+
+				for(let a=0;a<=1;a++)
+					for(let b=0;b<=1;b++)
+						for(let c=0;c<=1;c++)
+							body.innerHTML += makeRow(a, b, c)
+			}
+
+		</script>
+
 
 	</div>
 

@@ -222,6 +222,14 @@ th {
   padding: 0;
 }
 
+
+
+table.table tbody tr td:not(:first-child):not(:last-child),
+table.table thead tr th:not(:first-child):not(:last-child) {
+  border-left: 2px solid gray;
+  border-right: 2px solid gray;
+}
+
 /*! Source: https://github.com/h5bp/html5-boilerplate/blob/master/src/css/main.css */
 @media print {
   *,
