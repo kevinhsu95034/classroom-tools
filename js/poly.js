@@ -14,14 +14,14 @@ function makeFraction(a, b){
     }
 }
 
-function makePolynomial(n, limit=true){
+function makePolynomial(n, limit=3){
     let poly = []
     for(let i=0;i<=n;i++){
         poly[i] = Math.floor(Math.random()*20)-10
     }
-    if(limit)
-        while(poly[n]==0 || poly[n] > 2 || poly[n] < -2 )
-            poly[n] = Math.floor(Math.random()*4)-2
+    if(limit>0)
+        while(poly[n]==0 || poly[n] > limit || poly[n] < -limit )
+            poly[n] = Math.floor(Math.random()*limit*2)-limit
     else
         while(poly[n]==0)
             poly[n] = Math.floor(Math.random()*20)-10

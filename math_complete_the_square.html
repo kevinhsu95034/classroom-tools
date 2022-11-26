@@ -1,9 +1,10 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
+
+<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Timer - Mr. Kevin's Tools</title>
+	<title>Complete the Square - Mr. Kevin's Tools</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Mr. Kevin's classroom tools" />
 	<meta name="author" content="Kevin Hsu" />
@@ -29,9 +30,23 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-	</head>
 
-	<body>
+	<script type="text/x-mathjax-config">
+	MathJax.Hub.Config({
+		tex2jax: {
+		inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+		processEscapes: true
+		}
+	});
+	</script>
+
+	<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+	<script type="text/javascript" src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
+</head>
+
+<body>
 	<div class="fh5co-loader"></div>
 
 	<div id="page">
@@ -89,26 +104,45 @@
 			</div>
 		</nav>
 
-        <h1 style="margin-left:50px"> Timer (Page under construction)</h1>
+		<h1 style="margin-left:50px">Complete the square</h1>
 		<div class="container">
-			<div class="text-center" >
-				<span id="timer" style="font-size: 500%;">
-					<input id="" type="number" step="5" min="0" max="300">
-					m
-					<input id="" type="number" step="5" min="0" max="59">
-					s
-				</span>
-				<br><br>
-				<div>
-					<button>Start</button>
-					<button>Restart</button>
-				</div>
-			</div>
-			<div>
-				<div>Announcement</div>
-				<textarea name="" id="" rows="7" style="width: 100%;line-height: 100%;font-size: 200%;"></textarea>
-			</div>
+			<div style="font-size:200%">Rewrite the quadratic expression by completing the square <span id="equation"></span> = <span id="answer">?</span></div>
+			<br>
+			<button onclick="showAnswer()">Show answer</button> <button onclick="location.reload()">Try another one</button>
 		</div>
+
+		<script src="js/poly.js"></script>
+		<script>
+			let f = makePolynomial(2)
+			while(f[1]==0)
+				f = makePolynomial(2)
+
+			document.getElementById("equation").innerHTML = "$"+ displayPolynomial(f) +"$"
+			MathJax.Hub.Typeset()
+
+			function showAnswer() {
+				let a = f[2]
+				let b = f[1]
+				let c = f[0]
+
+				let d = makeFraction(b, 2*a)
+				let e = makeFraction(-b*b+4*a*c, 4*a)
+
+				d = b*a<0?d:("+"+d)
+				e = ((-b*b+4*a*c)/a<=0)?e:("+"+e)
+
+				if(a==-1)
+					a = "-"
+				else if(a==1)
+					a = ""
+					
+				if(e == 0)
+					document.getElementById("answer").innerHTML = "$ "+a+" (x"+ d +")^2$"
+				else
+					document.getElementById("answer").innerHTML = "$ "+a+" (x"+ d +")^2"+e+"$"
+				MathJax.Hub.Typeset()
+			}
+		</script>
 
 	</div>
 
@@ -125,6 +159,6 @@
 	<!-- Main -->
 	<script src="js/main.js"></script>
 
-	</body>
-</html>
+</body>
 
+</html>
