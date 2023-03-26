@@ -26,3 +26,26 @@ function gate(a, b, type){
             return (a ^ b) == 1?0:1
     }
 }
+
+class Node
+{
+    constructor(data)
+    {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+function randomTreeFromList(lst){
+    let root = new Node(lst[0]);
+
+    for(let i=1;i<lst.length;i++){
+        while(true){
+            if(Math.random() > 0.5)
+                root.left = new Node(lst[i]);
+            else
+                root.right = new Node(lst[i]);
+        }
+    }
+}
