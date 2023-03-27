@@ -1,10 +1,9 @@
 <!DOCTYPE HTML>
 <html>
-
-<head>
+	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Complete the Square - Mr. Kevin's Tools</title>
+	<title>IB Computer Science Study Guide - Mr. Kevin's Tools</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Mr. Kevin's classroom tools" />
 	<meta name="author" content="Kevin Hsu" />
@@ -30,23 +29,9 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+	</head>
 
-	<script type="text/x-mathjax-config">
-	MathJax.Hub.Config({
-		tex2jax: {
-		inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-		processEscapes: true
-		}
-	});
-	</script>
-
-	<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-	<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-	<script type="text/javascript" src="https://cdn.plot.ly/plotly-2.14.0.min.js"></script>
-</head>
-
-<body>
+	<body>
 	<div class="fh5co-loader"></div>
 
 	<div id="page">
@@ -106,46 +91,19 @@
 			</div>
 		</nav>
 
-		<h1 style="margin-left:50px">Complete the square</h1>
+        <h1 style="margin-left:50px"> IB Computer Science Study Guide</h1>
 		<div class="container">
-			<div style="font-size:200%">Rewrite the quadratic expression by completing the square <span id="equation"></span> = <span id="answer">?</span></div>
-			<br>
-			<button onclick="showAnswer()">Show answer</button> <button onclick="location.reload()">Try another one</button>
-			<br><br><br><br><br><br>
+			<iframe src="https://docs.google.com/document/d/e/2PACX-1vQHuTyJkeOEs1XajGMgaqcLfGZ_6bFWjwUiRpCBy3AvNw3ZdGVlIJ4OPhmfQKCllpuqSqztUaeBqnKp/pub?embedded=true" width="100%" height="520"></iframe>
+			<br><br><br><br><br><br><br><br>
 		</div>
 
-		<script src="js/poly.js"></script>
+
+		<script src="js/util.js"></script>
+		<script src="js/compsci.js"></script>
 		<script>
-			let f = makePolynomial(2)
-			while(f[1]==0)
-				f = makePolynomial(2)
-
-			document.getElementById("equation").innerHTML = "$"+ displayPolynomial(f) +"$"
-			MathJax.Hub.Typeset()
-
-			function showAnswer() {
-				let a = f[2]
-				let b = f[1]
-				let c = f[0]
-
-				let d = makeFraction(b, 2*a)
-				let e = makeFraction(-b*b+4*a*c, 4*a)
-
-				d = b*a<0?d:("+"+d)
-				e = ((-b*b+4*a*c)/a<=0)?e:("+"+e)
-
-				if(a==-1)
-					a = "-"
-				else if(a==1)
-					a = ""
-					
-				if(e == 0)
-					document.getElementById("answer").innerHTML = "$ "+a+" (x"+ d +")^2$"
-				else
-					document.getElementById("answer").innerHTML = "$ "+a+" (x"+ d +")^2"+e+"$"
-				MathJax.Hub.Typeset()
-			}
+			
 		</script>
+
 
 	</div>
 
@@ -162,6 +120,6 @@
 	<!-- Main -->
 	<script src="js/main.js"></script>
 
-</body>
-
+	</body>
 </html>
+
